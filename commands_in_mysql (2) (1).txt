@@ -1,0 +1,280 @@
+LISTS OF COMMANDS IN MYSQL
+
+create database ______;
+
+show databases;
+
+use _______;
+
+create table _______ (___,___,____);
+
+insert into _______ (__,__,__) values (__,__,__),(__,__,__);
+
+insert into _______ values (__,__,__),(__,__,__);
+
+select * from _______;
+
+select __,__,__ from _____ where _____=/</>______ and ______ =/>/< ______;
+
+select max/min/avg(___) from ____;
+
+select count(____) from _____;
+#NOTE :we can use * to get all values
+
+select  (___+___+___) from _____;
+
+percentage
+select ((__+__+__)/(TOTAL))*100 from _____;
+
+count no. of records
+select count(___) from ____;
+
+
+EG..... NO. 1
+
+
+ create database COLLEGE;
+ show databases;
+ use college;
+ create table student (S_id int, S_name varchar(15), age int);
+ insert into student (S_id,S_name,age) values (01,'JAY',18);
+ insert into student (S_id,S_name,age) values (02 ,'SIMRANJIT',18);
+ insert into student (S_id,S_name,age) values (03 ,'KISHORE',18);
+ insert into student (S_id,S_name,age) values (04 ,'SHREYAS',18);
+ select * from student;
+ select S_id from student where S_name = 'JAY';
+ select S_name from student where S_id = 3;
+
+
+EG.....NO. 2
+
+
+ create database college;
+ use college;
+ create table EMPLOYEE(e_id int, e_name varchar(10), d_number int, age int, salary int);
+ insert into employee (e_id, e_name, d_number, age, salary) values (1, 'JAY' , 10,22,20000);
+ insert into employee (e_id, e_name, d_number, age, salary) values (2, 'RANJIT' , 19,22,20000);
+ insert into employee (e_id, e_name, d_number, age, salary) values (3, 'SHREYAS' , 15,22,20000);
+ insert into employee (e_id, e_name, d_number, age, salary) values (4, 'DAYA' , 5,22,20000);
+ insert into employee (e_id, e_name, d_number, age, salary) values (5, 'SIMI' , 10,22,20000);
+ select * from employee;
+ select e_name from employee where d_number = 10;
+ select e_name from employee where salary > 25000;
+ select e_id, e_name, salary from employee;
+
+
+EG....NO. 3
+
+
+use college;
+create table result (roll_no int, s_name varchar(10), sub1 int, sub2 int, sub3 int);
+insert into result (roll_no, S_name, sub1, sub2, sub3)
+ values
+ (1,'JAY', 98,98,98),
+ (2, 'SIMRANJIT', 97, 97, 97),
+ (3, 'SHREYAS', 96, 96, 96),
+ (4, 'KISHORE', 95, 95, 95),
+ (5, 'RANJEET', 94, 94, 94),
+ (6, 'UJWAL', 93, 93, 93),
+ (7, 'RISHAB', 92, 92, 92),
+ (8, 'SHAKTI', 91, 91, 91),
+ (9, 'ANGEL', 90, 90, 90),
+ (10, 'DAYA', 89, 89, 89);
+select * from result;
+select max(sub1) as sub1 from result;
+select avg(sub2) as sub1 from result;
+select count(*) from result;
+select min(sub2) as sub2 from result;
+select roll_no, s_name,(sub1 + sub2 + sub3) from result;
+select * , (sub1+sub2+sub3)/3 from result;
+select roll_no,s_name from result where sub1 = (select max(sub1) from result);
+select * from result where sub2>75 and sub1<75;
+
+
+EG....No. 4
+
+
+create table employee(e_id int, e_name varchar(10), salary int, d_no int);
+
+
+SUBquery>>query within another query
+query 1 : outer query ; query 2 : inner query.
+query 2 execute first and then shows in query 1.
+eg : select e_name from emp where salary = (select min(salary) from emp);
+		^query 1    		^query 2
+eg : select * from emp where
+       salary = (select max(salary) from emp where  
+       salary < (select max(salary) from emp));
+
+
+RACTICAL NO. 4 {QUESTIONS}
+AIM: write a sql querys to demonstrate the following 
+1.comparision operator:
+2.arithmetic operator:
+  ADD(+), SUBRACT(-), MULTIPLY(*),DIVISION(/), INTEGER,INTERGER DIVISION(DIV), MODULUS(REMAINDER(%))
+3.logical operators :
+    AND, OR , NOT, XOR [TRUE=1, FALSE=0]
+4. IN $ NOT IN:
+5. BETWEEN AND NOT BETWEEN:
+6. IS NULL $ IS NOT NULL:
+
+LOGICAL OPERATORS
+select * from ______ where _____ >= ______ AND _____ like '___%';
+eg select * from products where quantity >= 5000 AND name like 'pen%';
+select * from products where quantity >=5000 AND price < 1.24 AND name like 'pen%';
+select * from products where NOT (quantity >= 5000 AND name like 'pen%');
+
+
+IN $ NOT IN
+
+used for comparing a range of values
+if you have multiple values to check you have to use multiple or
+thats why in case of multiple or we use in
+
+BETWEEN $ NOT BETWEEN
+
+select * from products where (price BETWEEN 1.0 AND 2.0) AND (quantity BETWEEN 1000 AND 2000);
+
+DIFFERENCE BETNN BETWEEN AND IN??????
+IN DOES'NT SPECIFIES RANGE
+BETWEEN SPECIFIES RANGE
+
+NULL AND NOT NULL
+
+select * from products where productcode is NULL;
+~~~~COMMON MISTAKE~~~
+select * from products where productcode = NULL
+
+
+
+PRACTICAL 05 {QUESTIONS}
+AIM: write sql quries to  demonstrate the following 
+1. ordered by clause [ascending or descending]
+2. group by clause
+It merges rows if find same 
+3. having clause
+it filters or restricts the values selected
+after group clause.....
+4. limit 
+
+
+select * from _____ where ______ ORDER BY columnA ASD/DESC , columnB ASC/DES, _____
+eg . select * from products where name like 'pen%' ORDER BY price DESC;
+select * from products where name like 'pen%' ORDER BY price DESC, quantity;
+payle jo coloumn likha hai woh  payle execute karenge
+
+
+limit 
+used to limit the no. of rows displayed in big databases
+there will be many rows in database
+but we wanted to se see only selected no. of rows
+eg. select * from products ORDER BY price LIMIT 2, 1;
+2,1 means leave first two and select 3rd
+
+
+AS - Alias 
+to give alternate name to colums
+eg. select P_id AS id , P_code AS code,
+P_name AS description, price AS 'UNIT PRICE' from products;
+~~~~DOESNT ACTUALLY CHANGES NAME O FCOLUMN
+JUST FOR NOW DISPLAY~~~~~~~
+
+
+FUNCTION CONCAT()
+~~~USED TO JOIN TWO COLUMS~~~
+ eg. select CONCAT(productcode,'-',name) AS 'product description', price from products;
+select CONCAT(lastname,'-',firstname,'-',middlename) AS 'lastname,firstname,middlename', from products
+
+
+PRACTICAL 04
+
+create database if not exists company;
+use company;
+create table if not exists products(P_id int,P_name varchar(30), P_code int , price float, quantity int);
+insert into products value (1,'Pen Black',13,1.24,5000),
+ (2,'Pen Blue',null,2,1000),
+ (3,'Pen Red',null,3.56,3000),
+ (4,'Ink Red',007,5.23,2000),
+ (5,'Ink Black',027,3.26,3000),
+ (6,'Ink Blue',017,1.25,5000),
+ (6,'Ink Blue',017,1.25,5000),
+ (7,'Ink Blue',017,1.25,5000),
+ (null,null,null,null,null),
+ (9,'Ink Pink',077,5,8000);
+select 5=5, 5>4, 5<4, 5>=5, 5<=2, 5!=5;
+select * from products where price = 1.25;
+select * from products where price <= 3;
+select * from products where price >= 4;
+select * from products where price != 1.25;
+select 5+6, 8-3, 5*4, 5/2,  5%2 ;
+select price + 5 from products;
+select price - 1 from products;
+select price * 2 from products;
+select price / 5 from products;
+select price %3 from products;
+select P_name from products where price + 5000 < 5002;
+select * from products where quantity >= 5000 AND P_name like 'pen%';
+select * from products where quantity >=5000 OR price < 1.24 AND P_name like 'pen%';
+select * from products where NOT (quantity >= 5000 AND p_name like 'pen%');
+select * from products where quantity >=5000 XOR price < 1.24 AND P_name like 'pen%';
+select * from products where P_id IN (1,4,6);
+select * from products where P_id NOT IN (1,4,6); 
+select * from products where
+ (price BETWEEN 1.0 AND 2.0) AND (quantity BETWEEN 1000 AND 2000);
+select * from products where price not between 1.0 AND 1.25;
+select * from products where P_code is NULL;
+
+PRACTICAL 05
+
+select * from products where p_name like 'pen%' ORDER BY price DESC, quantity;
+select * from products where p_name like 'pen%' ORDER BY price ASC;
+select price from products GROUP BY price;
+select price, COUNT(price) from products GROUP BY price;
+select * from products GROUP BY p_code;
+~~~~~~~~~~~~~~~~~~DOUBT~~~~~~~~~~~~~~
+select price from products GROUP BY price HAVING P_id = 2 ;
+~~~~~~~~~~~~~~~~~~DOUBT~~~~~~~~~~~~~~
+select * from products ORDER BY price LIMIT 2;
+select * from products LIMIT 2, 1;
+select P_id AS id , P_code AS code,P_name AS description, price AS 'UNIT PRICE' from products;
+select CONCAT (P_code,'-',P_name) AS description, price AS 'UNIT PRICE' from products;
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+create database if exists company;
+use company;
+create table part (p_id int PRIMARY KEY auto_increment,p_name varchar(15),
+quantity int not null default '99', supp_name varchar(30) not null);
+		OR
+create table part (p_id int auto_increment,p_name varchar(15) not null,
+quantity int unsigned not null default '99', supp_name varchar(30) not null,
+PRIMARY KEY(p_id));
+insert into part values
+(
+);
+select * from part;
+select p_name from part where quantity < 10;
+select p_id, p_name from part ORDER BY quantity DESC;
+select p_name from part where p_name like 'ABC%';
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+select gender, count(gender) AS 'NO .' GROUP BY gender;
+
+select CONCAT(sports,'-',COUNT(sports) AS num_players) GROUP BY sports;
+
+select CONCAT(sports,'-',COUNT(sports) AS num_players) GROUP BY sports 
+HAVING COUNT(sports) > 2;
+
+
+select COUNT(*) AS 'COUNT' from products;
+select p_code, COUNT(*) from products GROUP BY p_code;
+
+select sports,COUNT(sports) as NUM_SPORTS,gender ,COUNT(gender) 
+as NUM_GENDER from players GROUP BY sports,gender;
+
+
+
